@@ -17,15 +17,9 @@ const Description = styled.h3`
   color: ${props => props.theme.secondaryText};
 `;
 
-const Image = styled.div`
-  background: url("/images/conference.png") no-repeat center;
-  background-size: cover;
-  width: 100%;
-  height: 210px;
-`;
-
 const InnerContainer = styled.div`
   padding: calc(6px * 4);
+  max-width: calc(6px * 180);
 `;
 
 export const Greeting = () => {
