@@ -78,7 +78,7 @@ const LetterOfRecommendationText = styled.div`
 `;
 const LetterOfRecommendation = styled.div`
   align-self: start;
-  padding-left: 20%;
+  padding-left: 10%;
   width: 70%;
   svg {
     color: white;
@@ -137,14 +137,16 @@ export const WorkExperience = () => {
                     </WorkTitle>
                     <WorkRole>Senior Node.js Developer</WorkRole>
                     <WorkDescription>
-                        My focus was on backend optimization, modernizing legacy systems for scalable, high-performance results.
-                        I enhanced MongoDB solutions and developed a zero-loss data migration microservice.
-                        I also transitioned APIs from CoffeeScript to TypeScript.
-                        <p>Additionally, I introduced a system for real-time database updates, increasing reliability for our products. You can see the result of my work at WebExpo 2021:</p>
+                        I introduced a system for real-time database updates, increasing reliability for our products. You can see the result of my work at WebExpo 2021:
                         <iframe src="https://slideslive.com/embed/presentation/38966117" width="100%"
                                 height="200px" allow="autoplay; fullscreen"
                                 sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation"
                                 frameBorder="0" scrolling="no"></iframe>
+                    <p>
+                        Normally, my focus was on backend optimization, modernizing legacy systems for scalable, high-performance results.
+                        I enhanced MongoDB solutions and developed a zero-loss data migration microservice.
+                        I also transitioned APIs from CoffeeScript to TypeScript.
+                    </p>
                     </WorkDescription>
                     <LetterOfRecommendation>
                         <LetterOfRecommendationTitle>Petr Burian (CTO @ Livesport)</LetterOfRecommendationTitle>

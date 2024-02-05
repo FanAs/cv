@@ -3,9 +3,9 @@ import {ReactElement, useState} from "react";
 
 const TechnologiesContainer = styled.div`
   display: grid;
-  width: 100%;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   row-gap: calc(12px * 1);
+  width: 100%;
   padding: calc(12px * 1) 0;
 `;
 
