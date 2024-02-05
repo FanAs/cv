@@ -67,7 +67,7 @@ const KnowledgeContainer = styled.div`
 
 const KnowledgeName = styled.div`
   font-size: smaller;
-  padding-bottom: 5px;
+  padding-bottom: calc(6px * 1);
   color: ${({theme}) => theme.secondaryText}
 `;
 
