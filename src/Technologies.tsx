@@ -3,7 +3,7 @@ import {ReactElement, useState} from "react";
 
 const TechnologiesContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   row-gap: calc(12px * 1);
   width: 100%;
   padding: calc(12px * 1) 0;
@@ -32,7 +32,7 @@ const NameWithIcon = styled.div<{$size?: 'normal' | 'small'}>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: calc(12px * 0.5);
+  column-gap: calc(12px * 1);
 `;
 
 const Name = styled.div`
@@ -44,8 +44,8 @@ const Name = styled.div`
 const Icon = styled.div<{$url: string}>`
   background: url("${props => props.$url}") no-repeat center center;
   background-size: contain;
-  width: calc(12px * 2);
-  height: calc(12px * 2);
+  width: calc(12px * 3);
+  height: calc(12px * 3);
 `;
 
 const Header = styled.div`
@@ -87,8 +87,8 @@ const knowledgeLevel = {
 };
 
 const Star = styled.div<{$color: string}>`
-  width: calc(12px * 0.5);
-  height: calc(12px * 0.5);
+  width: calc(10px);
+  height: calc(10px);
   border-radius: 50%;
   background-color: ${props => props.$color};
 `;

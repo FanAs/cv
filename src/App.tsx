@@ -11,13 +11,21 @@ const theme = {
     foreground: '#20252a',
     primaryText: 'white',
     primaryLightText: '#dcd9d9',
-    secondaryText: 'grey',
+    secondaryText: '#c2c2c2',
 }
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-rows: fit-content() 100%;
+`;
+
+const Footer = styled.div`
+  background-color: ${props => props.theme.foreground};
+  color: ${props => props.theme.primaryText};
+  font-size: 14pt;
+  text-align: center;
+  padding: calc(6px * 4);
 `;
 
 function App() {
@@ -30,6 +38,9 @@ function App() {
                 <LeftColumn />
                 <Content />
             </Grid>
+            <Footer>
+                You can find source code for this webpage on <a href={"https://github.com/FanAs/cv/"} target={"_blank"}>GitHub</a>
+            </Footer>
         </ThemeProvider>
     </div>
   );
