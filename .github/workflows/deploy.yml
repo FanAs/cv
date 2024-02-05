@@ -1,0 +1,41 @@
+name: Build and Deploy to SSH Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t cv .
+
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to SSH Server
+        run: |
+          # Replace with your server's details
+          SSH_HOST=${{ secrets.SSH_HOST }}
+          SSH_USER=github
+          SSH_PORT=22
+          DEPLOY_PATH=/path/to/deploy
+
+          # Transfer Docker image to server
+          docker save my-react-app | ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker load"
+
+          # Stop the existing container (if this is not the first deployment)
+          ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker stop my-react-app-container || true && docker rm my-react-app-container || true"
+
+          # Start the new container
+          ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker run -d --name my-react-app-container -p 80:80 my-react-app"
+
