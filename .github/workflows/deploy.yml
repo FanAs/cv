@@ -26,9 +26,9 @@ jobs:
         run: |
           # Replace with your server's details
           SSH_HOST=${{ secrets.SSH_HOST }}
-          SSH_USER=github
+          SSH_USER=root
           SSH_PORT=22
-          DEPLOY_PATH=/path/to/deploy
+          DEPLOY_PATH=/home/github/cv
 
           # Transfer Docker image to server
           docker save cv | ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker load"
