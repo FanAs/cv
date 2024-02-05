@@ -24,11 +24,10 @@ jobs:
 
       - name: Deploy to SSH Server
         run: |
-          # Replace with your server's details
           SSH_HOST=${{ secrets.SSH_HOST }}
-          SSH_USER=root
+          SSH_USER=${{ secrets.SSH_USER }}
           SSH_PORT=22
-          DEPLOY_PATH=/home/github/cv
+          DEPLOY_PATH=${{ secrets.DEPLOY_PATH }}
 
           # Transfer Docker image to server
           docker save cv | ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker load"
