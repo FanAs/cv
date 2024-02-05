@@ -2,8 +2,9 @@ import styled from "styled-components";
 import {ReactElement, useState} from "react";
 
 const TechnologiesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 50% 50%;
   row-gap: calc(12px * 1);
   padding: calc(12px * 1) 0;
 `;

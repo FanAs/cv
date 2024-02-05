@@ -7,7 +7,7 @@ import {Technologies} from "./Technologies";
 const LeftColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(12px * 24);
+  align-items: center;
   background-color: ${props => props.theme.background};
 `;
 
@@ -21,7 +21,6 @@ const Separator = styled.div`
 export const LeftColumn = () => {
     return (
         <LeftColumnContainer>
-            <Me />
             <PrimaryInfo />
             <Separator />
             <Languages />

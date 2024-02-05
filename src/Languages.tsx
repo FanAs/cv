@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const LanguagesContainer = styled.div`
   display: flex;
+  width: 60%;
   flex-direction: row;
   justify-content: space-between;
 `;

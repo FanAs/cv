@@ -5,7 +5,7 @@ const PrimaryInfoContainer = styled.div`
   padding: calc(12px * 2) 0;
   flex-direction: column;
   row-gap: calc(12px / 2);
-  width: 100%;
+  width: 60%;
 `;
 
 const Line = styled.div`
