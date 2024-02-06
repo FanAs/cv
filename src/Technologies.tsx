@@ -15,7 +15,7 @@ const TechnologiesContainer = styled.div`
   }
 `;
 
-const TechnologyContainer = styled.div<{ $hide?: boolean }>`
+const TechnologyContainer = styled.div<{ $hide?: boolean, $printing?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,7 +24,7 @@ const TechnologyContainer = styled.div<{ $hide?: boolean }>`
 
   @keyframes slideInFromLeft {
     0% {
-      transform: translateX(-100%);
+      transform: ${props => props.$printing === true ? 'translateX(0)' : 'translateX(-100%)'};
     }
     100% {
       transform: translateX(0);
@@ -114,7 +114,7 @@ const Knowledge = ({ children }: { children: keyof typeof knowledgeLevel }): Rea
 );
 
 const Technology = ({ hide, knowledge, icon, children }: { hide?: boolean, knowledge: keyof typeof knowledgeLevel, icon: string, children: string }): React.ReactElement => (
-  <TechnologyContainer $hide={hide}>
+  <TechnologyContainer $hide={hide} $printing={useIsPrinting()}>
     <NameWithIcon>
       <Icon $url={icon}/>
       <Name>{children}</Name>

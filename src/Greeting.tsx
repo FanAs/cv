@@ -51,7 +51,7 @@ export const Greeting = (): React.ReactElement => (
         excel.
         <PrintMe>You can <Link onClick={() => {
           window.print();
-        }}>print me</Link> to get my CV, or you can <a download={true}
+        }}>print the page</Link> to get my CV, or you can <a download={true}
                                                                    href={`/${encodeURIComponent('Artyom Suchkov - CV.pdf')}`}>download
           my full CV</a></PrintMe>
       </Description>
