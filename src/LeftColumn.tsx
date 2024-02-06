@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import {Me} from "./Me";
-import {PrimaryInfo} from "./PrimaryInfo";
-import {Languages} from "./Languages";
-import {Technologies} from "./Technologies";
+import styled from 'styled-components';
+import { PrimaryInfo } from './PrimaryInfo';
+import { Languages } from './Languages';
+import { Technologies } from './Technologies';
+import React from 'react';
 
 const LeftColumnContainer = styled.div`
   display: flex;
@@ -15,17 +15,15 @@ const Separator = styled.div`
   width: 90%;
   height: 2px;
   margin: 0 auto;
-  background-color: ${({theme}) => theme.secondaryText};
+  background-color: ${({ theme }) => theme.secondaryText};
 `;
 
-export const LeftColumn = () => {
-    return (
-        <LeftColumnContainer>
-            <PrimaryInfo />
-            <Separator />
-            <Languages />
-            <Separator />
-            <Technologies />
-        </LeftColumnContainer>
-    )
-}
+export const LeftColumn = (): React => (
+  <LeftColumnContainer>
+    <PrimaryInfo/>
+    <Separator/>
+    <Languages/>
+    <Separator/>
+    <Technologies/>
+  </LeftColumnContainer>
+);

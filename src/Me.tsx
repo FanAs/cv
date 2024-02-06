@@ -1,12 +1,12 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const MeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  row-gap: calc(12px * 1);
+  row-gap: calc(6px * 2);
   padding: 12px 0;
   background-color: ${props => props.theme.foreground};
 `;
@@ -15,8 +15,8 @@ const ProfileImage = styled.div`
   background-image: url("./images/me.jpeg");
   background-size: cover;
   border-radius: 50%;
-  width: calc(12px * 8);
-  height: calc(12px * 8);
+  width: calc(6px * 16);
+  height: calc(6px * 16);
 `;
 
 const Name = styled.a`
@@ -29,6 +29,12 @@ const Name = styled.a`
     display: inline-block;
     text-decoration: none;
   }
+
+  @media print {
+    &:after {
+      display: none;
+    }
+  }
 `;
 
 const Roles = styled.div`
@@ -36,25 +42,23 @@ const Roles = styled.div`
   text-align: center;
 `;
 
-const Role = styled.div<{$primary?: boolean}>`
+const Role = styled.div<{ $primary?: boolean }>`
   color: ${props => props.theme.secondaryText};
-  padding-bottom: calc(12px * 0.5);
+  padding-bottom: calc(6px * 1);
   font-size: 11pt;
   
-  ${props => props.$primary && css`
+  ${props => props.$primary === true && css`
     font-weight: 500;
   `}
 `;
 
-export const Me = () => {
-    return (
-        <MeContainer>
-            <ProfileImage />
-            <Name href={"https://www.linkedin.com/in/artyom-suchkov/"} target={"_blank"}>Artyom Suchkov</Name>
-            <Roles>
-                <Role $primary>Senior Node.js Developer</Role>
-                <Role>Full-Stack JS Developer</Role>
-            </Roles>
-        </MeContainer>
-    );
-}
+export const Me = (): React => (
+  <MeContainer>
+    <ProfileImage/>
+    <Name href={'https://www.linkedin.com/in/artyom-suchkov/'} target={'_blank'}>Artyom Suchkov</Name>
+    <Roles>
+      <Role $primary>Senior Node.js Developer</Role>
+      <Role>Full-Stack JS Developer</Role>
+    </Roles>
+  </MeContainer>
+);

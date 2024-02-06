@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import React from 'react';
 
 const GreetingContainer = styled.header`
   background-color: ${props => props.theme.foreground};
@@ -9,6 +10,10 @@ const Title = styled.h1`
   font-size: 20pt;
   font-weight: bold;
   color: ${props => props.theme.primaryText};
+
+  @media print {
+    display: none;
+  }
 `;
 
 const Description = styled.h3`
@@ -18,19 +23,38 @@ const Description = styled.h3`
 `;
 
 const InnerContainer = styled.div`
-  padding: calc(6px * 4);
+  padding: 0 calc(6px * 4);
   max-width: calc(6px * 180);
 `;
 
-export const Greeting = () => {
-    return (
-        <GreetingContainer>
-            <InnerContainer>
-                <Title>Hi.</Title>
-                <Description>
-                    I'm a <b>Node.js expert</b> with {Math.floor((new Date().getTime() - new Date('2016-06-01').getTime()) / 3.15576e+10)}+ years crafting scalable backends, leading tech transformations at <a href="https://en.wikipedia.org/wiki/Semrush" target={"_blank"}>Semrush</a> and <a href="https://en.wikipedia.org/wiki/Livesport" target="_blank">Livesport</a>. Passionate about performance optimization, security, and mentoring, I drive projects to innovate and excel.
-                </Description>
-            </InnerContainer>
-        </GreetingContainer>
-    );
-}
+const PrintMe = styled.p`
+  @media print {
+    display: none;
+  }
+`;
+
+const Link = styled.a`
+  cursor: pointer;
+`;
+
+export const Greeting = (): React => (
+  <GreetingContainer>
+    <InnerContainer>
+      <Title>Hi.</Title>
+      <Description>
+        I&apos;m a <b>Node.js
+          expert</b> with {Math.floor((new Date().getTime() - new Date('2016-06-01').getTime()) / 3.15576e+10)}+
+        years crafting scalable backends, leading tech transformations at <a
+                    href="https://en.wikipedia.org/wiki/Semrush" target={'_blank'} rel="noreferrer">Semrush</a> and <a
+                    href="https://en.wikipedia.org/wiki/Livesport" target="_blank" rel="noreferrer">Livesport</a>.
+        Passionate about performance optimization, security, and mentoring, I drive projects to innovate and
+        excel.
+        <PrintMe>You can <Link onClick={() => {
+          window.print();
+        }}>print me</Link> to get my CV, or you can <a download={true}
+                                                                   href={`/${encodeURIComponent('Artyom Suchkov - CV.pdf')}`}>download
+          my full CV</a></PrintMe>
+      </Description>
+    </InnerContainer>
+  </GreetingContainer>
+);
