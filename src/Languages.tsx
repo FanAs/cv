@@ -29,14 +29,14 @@ const LanguageLevel = styled.div`
   font-size: small;
 `;
 
-const Language = ({ level, children }: { level: 'proficient' | 'native' | 'beginner', children: string }) => (
+const Language = ({ level, children }: { level: 'proficient' | 'native' | 'beginner', children: string }): React.ReactElement => (
   <LanguageContainer>
     <LanguageName>{children}</LanguageName>
     <LanguageLevel>{level}</LanguageLevel>
   </LanguageContainer>
 );
 
-export const Languages = (): React => (
+export const Languages = (): React.ReactElement => (
   <LanguagesContainer>
     <Language level={'proficient'}>English</Language>
     <Language level={'proficient'}>Czech</Language>

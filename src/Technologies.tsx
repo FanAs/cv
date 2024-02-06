@@ -105,7 +105,7 @@ const Star = styled.div<{ $color: string }>`
   background-color: ${props => props.$color};
 `;
 
-const Knowledge = ({ children }: { children: keyof typeof knowledgeLevel }): React => (
+const Knowledge = ({ children }: { children: keyof typeof knowledgeLevel }): React.ReactElement => (
   <KnowledgeContainer>
     <KnowledgeName>{children}</KnowledgeName>
     <KnowledgeLevelContainer>{[...Array(knowledgeLevel[children].level)].map((_, i) => <Star key={i}
@@ -113,7 +113,7 @@ const Knowledge = ({ children }: { children: keyof typeof knowledgeLevel }): Rea
   </KnowledgeContainer>
 );
 
-const Technology = ({ hide, knowledge, icon, children }: { hide?: boolean, knowledge: keyof typeof knowledgeLevel, icon: string, children: string }): React => (
+const Technology = ({ hide, knowledge, icon, children }: { hide?: boolean, knowledge: keyof typeof knowledgeLevel, icon: string, children: string }): React.ReactElement => (
   <TechnologyContainer $hide={hide}>
     <NameWithIcon>
       <Icon $url={icon}/>
@@ -144,7 +144,7 @@ const SectionButton = styled.div`
   cursor: pointer;
 `;
 
-const Section = ({ children, header }: { children: Array<ReactElement<typeof Technology>>, header: string }): React => {
+const Section = ({ children, header }: { children: Array<ReactElement<typeof Technology>>, header: string }): React.ReactElement => {
   const [showAll, setShowAll] = useState(false);
   const isPrinting = useIsPrinting();
 
@@ -154,12 +154,12 @@ const Section = ({ children, header }: { children: Array<ReactElement<typeof Tec
         <Header>{header}</Header>
         {!isPrinting && children.some(child => (child.props as any).hide) && <SectionButton onClick={() => { setShowAll(!showAll); }}>{showAll ? 'show less' : 'show all'}</SectionButton>}
       </HeaderContainer>
-      {children.filter(child => isPrinting || showAll ? true : !(child.props as any).hide)}
+      {children.filter(child => isPrinting || showAll ? true : (child.props as any).hide !== true)}
     </SectionContainer>
   );
 };
 
-export const Technologies = (): React => (
+export const Technologies = (): React.ReactElement => (
   <TechnologiesContainer>
     <Section header={'languages'}>
       <Technology knowledge={'expert'}

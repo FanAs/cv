@@ -33,7 +33,7 @@ const Value = styled.div`
   color: ${props => props.theme.secondaryText};
 `;
 
-export const PrimaryInfo = (): React => (
+export const PrimaryInfo = (): React.ReactElement => (
   <PrimaryInfoContainer>
     <Line>
       <Title>residence</Title>

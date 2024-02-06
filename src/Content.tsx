@@ -14,7 +14,7 @@ const ContentInnerContainer = styled.div`
   max-width: calc(6px * 180);
 `;
 
-export const Content = (): React => (
+export const Content = (): React.ReactElement => (
   <ContentContainer>
     <ContentInnerContainer>
       <WorkExperience/>

@@ -18,7 +18,7 @@ const Separator = styled.div`
   background-color: ${({ theme }) => theme.secondaryText};
 `;
 
-export const LeftColumn = (): React => (
+export const LeftColumn = (): React.ReactElement => (
   <LeftColumnContainer>
     <PrimaryInfo/>
     <Separator/>

@@ -37,7 +37,7 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
-export const Greeting = (): React => (
+export const Greeting = (): React.ReactElement => (
   <GreetingContainer>
     <InnerContainer>
       <Title>Hi.</Title>

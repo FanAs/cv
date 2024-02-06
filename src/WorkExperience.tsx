@@ -114,7 +114,7 @@ const SlideSliveIFrame = styled.iframe`
     }
 `;
 
-export const WorkExperience = (): React => (
+export const WorkExperience = (): React.ReactElement => (
   <WorkExperienceContainer>
     <Header>Work experience</Header>
     <Works>

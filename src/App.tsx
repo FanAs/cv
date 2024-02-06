@@ -22,7 +22,7 @@ const lightTheme = {
   secondaryText: '#1a1a1a'
 };
 
-const App = (): React => {
+const App = (): React.ReactElement => {
   const isPrinting = useIsPrinting();
 
   return (

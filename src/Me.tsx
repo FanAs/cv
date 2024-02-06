@@ -52,7 +52,7 @@ const Role = styled.div<{ $primary?: boolean }>`
   `}
 `;
 
-export const Me = (): React => (
+export const Me = (): React.ReactElement => (
   <MeContainer>
     <ProfileImage/>
     <Name href={'https://www.linkedin.com/in/artyom-suchkov/'} target={'_blank'}>Artyom Suchkov</Name>

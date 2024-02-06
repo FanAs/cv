@@ -9,7 +9,7 @@ const FooterContainer = styled.div`
   padding: calc(6px * 4);
 `;
 
-export const Footer = (): React => (
+export const Footer = (): React.ReactElement => (
   <FooterContainer>
     You can find source code for this webpage on my <a href={'https://github.com/FanAs/cv/'} target={'_blank'}
                                                            rel="noreferrer">GitHub</a>.

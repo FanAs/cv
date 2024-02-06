@@ -19,7 +19,7 @@ const ResponsiveGridContainer = styled.div`
   }
 `;
 
-export const ResponsiveGrid = (): React => (
+export const ResponsiveGrid = (): React.ReactElement => (
   <ResponsiveGridContainer>
     <Me/>
     <Greeting/>
