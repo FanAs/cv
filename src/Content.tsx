@@ -8,7 +8,6 @@ const ContentContainer = styled.div`
   background: ${({ theme }) => theme.background};
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 const ContentInnerContainer = styled.div`

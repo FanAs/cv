@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import { useIsPrinting } from './useIsPrinting';
 import { Footer } from './Footer';
 import { ResponsiveGrid } from './ResponsiveGrid';
@@ -22,13 +22,31 @@ const lightTheme = {
   secondaryText: '#1a1a1a'
 };
 
+const CenteredContainer = styled.div`
+  display: flex;
+  background: ${props => props.theme.background};
+  justify-content: center;
+`;
+
+const BackgroundWideScreenWasher = styled.div`
+  @media screen and (min-width: 1390px) {
+    position: absolute;
+    width: 100vw;
+    height: 211px;
+    background: ${props => props.theme.foreground};
+  }
+`;
+
 const App = (): React.ReactElement => {
   const isPrinting = useIsPrinting();
 
   return (
     <div className="App">
       <ThemeProvider theme={isPrinting ? lightTheme : darkTheme}>
-        <ResponsiveGrid />
+        <CenteredContainer>
+          <BackgroundWideScreenWasher />
+          <ResponsiveGrid />
+        </CenteredContainer>
         <Footer />
       </ThemeProvider>
     </div>

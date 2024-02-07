@@ -9,6 +9,7 @@ const ResponsiveGridContainer = styled.div`
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-rows: fit-content() 100%;
+  z-index: 1;
 
   @media print {
     grid-template-columns: 100%;

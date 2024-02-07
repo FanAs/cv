@@ -4,9 +4,6 @@ import React from 'react';
 const GreetingContainer = styled.header`
   background-color: ${props => props.theme.foreground};
   padding-left: calc(6px * 2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Title = styled.h1`
