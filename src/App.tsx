@@ -31,7 +31,7 @@ const CenteredContainer = styled.div`
 const BackgroundWideScreenWasher = styled.div`
   @media screen and (min-width: 1390px) {
     position: absolute;
-    width: 100vw;
+    width: 100%;
     height: calc(6px * 36);
     background: ${props => props.theme.foreground};
   }
