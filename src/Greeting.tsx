@@ -3,7 +3,12 @@ import React from 'react';
 
 const GreetingContainer = styled.header`
   background-color: ${props => props.theme.foreground};
-  padding-left: calc(6px * 2);
+  padding: calc(6px * 2) 0 calc(6px * 2) calc(6px * 2);
+  height: calc(6px * 32);
+
+  @media screen and (max-width: 1024px) {
+    height: inherit;
+  }
 `;
 
 const Title = styled.h1`

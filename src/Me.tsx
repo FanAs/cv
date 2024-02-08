@@ -6,6 +6,7 @@ const MeContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  height: calc(6px * 32);
   row-gap: calc(6px * 2);
   padding: 12px 0;
   background-color: ${props => props.theme.foreground};
