@@ -36,5 +36,5 @@ jobs:
           ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker stop cv-container || true && docker rm cv-container || true"
 
           # Start the new container
-          ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker run -d --name cv-container -v -p 80:80 cv"
+          ssh -o StrictHostKeyChecking=no -p $SSH_PORT $SSH_USER@$SSH_HOST "docker run -d --name cv-container -v -p 3000:80 cv"
 
