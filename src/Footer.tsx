@@ -7,6 +7,10 @@ const FooterContainer = styled.div`
   font-size: 14pt;
   text-align: center;
   padding: calc(6px * 4);
+  
+  @media print {
+    display: none;
+  }
 `;
 
 export const Footer = (): React.ReactElement => (

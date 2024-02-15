@@ -38,7 +38,8 @@ const WorkLogo = styled.div<{ $url: string }>`
 
 const WorkDescription = styled.div`
   color: ${props => props.theme.primaryLightText};
-  font-size: 14pt;
+  font-size: 13pt;
+  margin-left: calc(6px * 1);
 `;
 
 const WorkRole = styled.div`
@@ -82,9 +83,26 @@ const LetterOfRecommendation = styled.div`
   align-self: start;
   padding-left: 10%;
   width: 70%;
+  
+  @media print {
+    width: 90%;
+  }
+
   svg {
     color: white;
     width: calc(6px * 2);
+  }
+`;
+
+const Bullet = styled.p`
+  padding-left: calc(6px * 2);
+  font-size: 12pt;
+  margin-block-start: calc(6px * 1);
+  margin-block-end: calc(6px * 1);
+
+  &::before {
+    content: "🔹";
+    padding-right: calc(6px * 1);
   }
 `;
 
@@ -109,9 +127,11 @@ const WorkMain = styled.div`
 `;
 
 const SlideSliveIFrame = styled.iframe`
-    @media print {
-      display: none;
-    }
+  @media print {
+    display: none;
+  }
+  
+  margin-bottom: calc(6px * 2);
 `;
 
 export const WorkExperience = (): React.ReactElement => (
@@ -129,11 +149,10 @@ export const WorkExperience = (): React.ReactElement => (
         </WorkTitle>
         <WorkRole>Senior Node.js Developer</WorkRole>
         <WorkDescription>
-          I focused on refactoring to TypeScript for better code quality and security, and took key role
-          in developing a comprehensive set of microservices.
-          I also worked on optimizing data streams for efficiency and scalability.
-          Additionally, I contributed to enhancing security practices, culminating in our team securing
-          third place in a security CTF competition.
+          In my current role, I am primarily focused on the development of new APIs and enhancing the security and efficiency of our applications. Here’s a brief introduction that reflects this focus:
+          <Bullet>I’ve been crucial in the entire development process of a new API, from the initial idea to the final deployment, focusing on creating scalable, maintainable, and high-quality code.</Bullet>
+          <Bullet>I am involved in converting our old JavaScript applications to TypeScript. This change is making our code stronger and easier to manage, while also making it clearer and reducing errors.</Bullet>
+          <Bullet>Working on finding and fixing security issues in our applications. I also participated in a tough security CTF contest and with my team, we finished in 3rd place among 20 competitors.</Bullet>
         </WorkDescription>
       </Work>
       <Separator/>
@@ -148,18 +167,21 @@ export const WorkExperience = (): React.ReactElement => (
         </WorkTitle>
         <WorkRole>Senior Node.js Developer</WorkRole>
         <WorkDescription>
-          I introduced a system for real-time database updates, increasing reliability for our products.
-          You can see the result of my work at WebExpo 2021:
-          <SlideSliveIFrame src="https://slideslive.com/embed/presentation/38966117" width="100%"
-                                          height="200px" allow="autoplay; fullscreen"
-                                          sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation"
-                                          frameBorder="0" scrolling="no"></SlideSliveIFrame>
-          <p>
-            Normally, my focus was on backend optimization, modernizing legacy systems for scalable,
-            high-performance results.
-            I enhanced MongoDB solutions and developed a zero-loss data migration microservice.
-            I also transitioned APIs from CoffeeScript to TypeScript.
-          </p>
+          As a dedicated professional at Livesport,
+          I played a key role in enhancing our database and API systems,
+          leading to significant improvements in performance, reliability, and scalability.
+          With a hands-on approach, I successfully led projects, developed and optimized APIs, and modernized legacy systems to meet current technological standards.
+          <Bullet>Looked closely at and improved MongoDB setups, leading to successful data migration without data loss on 1TB storage.</Bullet>
+          <Bullet>Took charge of developing and maintaining APIs with Node.js, making database use better and starting the use of a GraphQL, which made the system work better and easier to use.</Bullet>
+          <Bullet>Led the change of an old API from CoffeeScript to TypeScript, cutting down on unnecessary parts and bringing in modern ways of coding.</Bullet>
+          <Bullet>Introduced a system for real-time database updates, increasing reliability for our products, reaching more than 99.99% uptime. You can see the result of my work at WebExpo 2021:
+            <SlideSliveIFrame src="https://slideslive.com/embed/presentation/38966117" width="100%"
+                              height="200px" allow="autoplay; fullscreen"
+                              sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation"
+                              frameBorder="0" scrolling="no"></SlideSliveIFrame>
+          </Bullet>
+          <Bullet>Used the latest tech like TypeScript, GraphQL, ProtoBuf, Redis and MongoDB, laying the groundwork for solutions that can grow and work efficiently.</Bullet>
+          <Bullet>Led the team by example, encouraging a culture of learning and staying on top of new technologies and best ways of doing things.</Bullet>
         </WorkDescription>
         <LetterOfRecommendation>
           <LetterOfRecommendationTitle>Petr Burian (CTO @ Livesport)</LetterOfRecommendationTitle>
@@ -197,13 +219,16 @@ export const WorkExperience = (): React.ReactElement => (
         </WorkTitle>
         <WorkRole>Middle (2y) - Senior (1y) Full-Stack Developer</WorkRole>
         <WorkDescription>
-          I led the migration to React for frontend enhancement for <a
+          At Wikidi, my role as a full-stack developer focused on modernizing our tech stack and enhancing application performance.
+
+          <Bullet>Led the migration to React for frontend enhancement for <a
                         href={'https://www.lupa.cz/startupy/flowreader/'} target={'_blank'}
-                        rel="noreferrer">FlowReader.com</a>.
-          Additionally, I transformed PHP queues into Node.js microservices, significantly improving news
-          distribution efficiency and system maintainability.
-          My role was pivotal in modernizing the architecture and streamlining performance for
-          scalability.
+                        rel="noreferrer">FlowReader.com</a>.</Bullet>
+          <Bullet>Transformed PHP queues into Node.js microservices, significantly improving news
+            distribution efficiency.</Bullet>
+          <Bullet>Performed MongoDB analytics and optimizations, improving database efficiency and query performance.</Bullet>
+          <Bullet>My role was pivotal in modernizing the architecture and streamlining performance for
+            scalability.</Bullet>
         </WorkDescription>
       </Work>
     </Works>
