@@ -29,7 +29,13 @@ const LanguageLevel = styled.div`
   font-size: small;
 `;
 
-const Language = ({ level, children }: { level: 'proficient' | 'native' | 'beginner', children: string }): React.ReactElement => (
+const Language = ({
+  level,
+  children,
+}: {
+  level: 'proficient' | 'native' | 'beginner';
+  children: string;
+}): React.ReactElement => (
   <LanguageContainer>
     <LanguageName>{children}</LanguageName>
     <LanguageLevel>{level}</LanguageLevel>

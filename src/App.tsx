@@ -10,7 +10,7 @@ const darkTheme = {
   foreground: '#20252a',
   primaryText: 'white',
   primaryLightText: '#dcd9d9',
-  secondaryText: '#c2c2c2'
+  secondaryText: '#c2c2c2',
 };
 
 const lightTheme = {
@@ -19,7 +19,7 @@ const lightTheme = {
   foreground: '#ffffff',
   primaryText: '#000',
   primaryLightText: '#000',
-  secondaryText: '#1a1a1a'
+  secondaryText: '#1a1a1a',
 };
 
 const CenteredContainer = styled.div`

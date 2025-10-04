@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { Rocket } from 'lucide-react';
 
 const MeContainer = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const MeContainer = styled.div`
 `;
 
 const ProfileImage = styled.div`
-  background-image: url("./images/me.jpeg");
+  background-image: url('./images/me.jpeg');
   background-size: cover;
   border-radius: 50%;
   width: calc(6px * 16);
@@ -21,18 +22,20 @@ const ProfileImage = styled.div`
 `;
 
 const Name = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6px * 1);
   color: ${props => props.theme.primaryText};
-  font-weight: bolder;
-  
-  &:after {
-    content: "🚀";
-    padding-left: calc(6px * 1);
-    display: inline-block;
-    text-decoration: none;
+  font-weight: 800;
+  font-size: 14pt;
+
+  svg {
+    width: 18px;
+    height: 18px;
   }
 
   @media print {
-    &:after {
+    svg {
       display: none;
     }
   }
@@ -47,16 +50,21 @@ const Role = styled.div<{ $primary?: boolean }>`
   color: ${props => props.theme.secondaryText};
   padding-bottom: calc(6px * 1);
   font-size: 11pt;
-  
-  ${props => props.$primary === true && css`
-    font-weight: 500;
-  `}
+
+  ${props =>
+    props.$primary === true &&
+    css`
+      font-weight: 600;
+    `}
 `;
 
 export const Me = (): React.ReactElement => (
   <MeContainer>
-    <ProfileImage/>
-    <Name href={'https://www.linkedin.com/in/artyom-suchkov/'} target={'_blank'}>Artyom Suchkov</Name>
+    <ProfileImage />
+    <Name href={'https://www.linkedin.com/in/artyom-suchkov/'} target={'_blank'}>
+      Artyom Suchkov
+      <Rocket />
+    </Name>
     <Roles>
       <Role $primary>Senior Node.js Developer</Role>
       <Role>Full-Stack JS Developer</Role>

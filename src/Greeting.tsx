@@ -47,18 +47,32 @@ export const Greeting = (): React.ReactElement => (
     <InnerContainer>
       <Title>Hi.</Title>
       <Description>
-        I&apos;m a <b>Node.js
-          expert</b> with {Math.floor((new Date().getTime() - new Date('2016-06-01').getTime()) / 3.15576e+10)}+
-        years crafting scalable backends, leading tech transformations at <a
-                    href="https://en.wikipedia.org/wiki/Semrush" target={'_blank'} rel="noreferrer">Semrush</a> and <a
-                    href="https://en.wikipedia.org/wiki/Livesport" target="_blank" rel="noreferrer">Livesport</a>.
-        Passionate about performance optimization, security, and mentoring, I drive projects to innovate and
-        excel.
-        <PrintMe>You can <Link onClick={() => {
-          window.print();
-        }}>print the page</Link> to get my CV, or you can <a download={true}
-                                                                   href={`/${encodeURIComponent('Artyom Suchkov - CV.pdf')}`}>download
-          my full CV</a></PrintMe>
+        I&apos;m a <b>Node.js expert</b> with{' '}
+        {Math.floor((new Date().getTime() - new Date('2016-06-01').getTime()) / 3.15576e10)}+ years
+        crafting scalable backends, leading tech transformations at{' '}
+        <a href="https://en.wikipedia.org/wiki/Semrush" target={'_blank'} rel="noreferrer">
+          Semrush
+        </a>{' '}
+        and{' '}
+        <a href="https://en.wikipedia.org/wiki/Livesport" target="_blank" rel="noreferrer">
+          Livesport
+        </a>
+        . Passionate about performance optimization, security, and mentoring, I drive projects to
+        innovate and excel.
+        <PrintMe>
+          You can{' '}
+          <Link
+            onClick={() => {
+              window.print();
+            }}
+          >
+            print the page
+          </Link>{' '}
+          to get my CV, or you can{' '}
+          <a download={true} href={`/${encodeURIComponent('Artyom Suchkov - CV.pdf')}`}>
+            download my full CV
+          </a>
+        </PrintMe>
       </Description>
     </InnerContainer>
   </GreetingContainer>

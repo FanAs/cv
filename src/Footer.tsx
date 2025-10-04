@@ -7,7 +7,7 @@ const FooterContainer = styled.div`
   font-size: 14pt;
   text-align: center;
   padding: calc(6px * 4);
-  
+
   @media print {
     display: none;
   }
@@ -15,7 +15,10 @@ const FooterContainer = styled.div`
 
 export const Footer = (): React.ReactElement => (
   <FooterContainer>
-    You can find source code for this webpage on my <a href={'https://github.com/FanAs/cv/'} target={'_blank'}
-                                                           rel="noreferrer">GitHub</a>.
+    You can find source code for this webpage on my{' '}
+    <a href={'https://github.com/FanAs/cv/'} target={'_blank'} rel="noreferrer">
+      GitHub
+    </a>
+    .
   </FooterContainer>
 );

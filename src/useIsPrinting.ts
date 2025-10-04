@@ -8,7 +8,9 @@ export const useIsPrinting = (): boolean => {
     const originalPrint = window.print;
     window.print = () => {
       setIsPrinting(true);
-      setTimeout(() => { originalPrint(); }, 0);
+      setTimeout(() => {
+        originalPrint();
+      }, 0);
     };
 
     window.addEventListener('beforeprint', () => {

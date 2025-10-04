@@ -7,7 +7,7 @@ const PrimaryInfoContainer = styled.div`
   flex-direction: column;
   row-gap: calc(6px * 1);
   width: 60%;
-  
+
   @media screen and (max-width: 1200px) {
     width: 100%;
   }
@@ -25,7 +25,7 @@ const Title = styled.div`
   text-transform: capitalize;
   font-weight: 500;
   &:after {
-    content: ":";
+    content: ':';
   }
 `;
 
@@ -45,7 +45,9 @@ export const PrimaryInfo = (): React.ReactElement => (
     </Line>
     <Line>
       <Title>age</Title>
-      <Value>{Math.floor((new Date().getTime() - new Date('1998-02-21').getTime()) / 3.15576e+10)}</Value>
+      <Value>
+        {Math.floor((new Date().getTime() - new Date('1998-02-21').getTime()) / 3.15576e10)}
+      </Value>
     </Line>
   </PrimaryInfoContainer>
 );

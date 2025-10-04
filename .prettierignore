@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Build outputs
+dist
+build
+.vite
+
+# Config files
+package-lock.json
+
+# Other
+coverage
+.DS_Store

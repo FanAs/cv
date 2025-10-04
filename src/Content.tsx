@@ -17,7 +17,7 @@ const ContentInnerContainer = styled.div`
 export const Content = (): React.ReactElement => (
   <ContentContainer>
     <ContentInnerContainer>
-      <WorkExperience/>
+      <WorkExperience />
     </ContentInnerContainer>
   </ContentContainer>
 );

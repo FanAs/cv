@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { type ReactElement, useState } from 'react';
 import { useIsPrinting } from './useIsPrinting';
+import { Eye, EyeOff } from 'lucide-react';
 
 const TechnologiesContainer = styled.div`
   display: grid;
@@ -9,13 +10,12 @@ const TechnologiesContainer = styled.div`
   width: 100%;
   padding: calc(6px * 2) 0;
 
-
   @media print {
     page-break-before: always;
   }
 `;
 
-const TechnologyContainer = styled.div<{ $hide?: boolean, $printing?: boolean }>`
+const TechnologyContainer = styled.div<{ $hide?: boolean; $printing?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -24,15 +24,15 @@ const TechnologyContainer = styled.div<{ $hide?: boolean, $printing?: boolean }>
 
   @keyframes slideInFromLeft {
     0% {
-      transform: ${props => props.$printing === true ? 'translateX(0)' : 'translateX(-100%)'};
+      transform: ${props => (props.$printing === true ? 'translateX(0)' : 'translateX(-100%)')};
     }
     100% {
       transform: translateX(0);
     }
   }
-  
-  animation: ${props => props.$hide === true ? '0.5s ease-out 0s 1 slideInFromLeft' : 'none'};
-  
+
+  animation: ${props => (props.$hide === true ? '0.5s ease-out 0s 1 slideInFromLeft' : 'none')};
+
   @media print {
     animation: none;
     zoom: 60%;
@@ -53,7 +53,7 @@ const Name = styled.div`
 `;
 
 const Icon = styled.div<{ $url: string }>`
-  background: url("${props => props.$url}") no-repeat center center;
+  background: url('${props => props.$url}') no-repeat center center;
   background-size: contain;
   width: calc(6px * 6);
   height: calc(6px * 6);
@@ -64,9 +64,9 @@ const Header = styled.div`
   font-weight: bold;
   padding: 0 calc(12px);
   text-transform: capitalize;
-  
+
   &:after {
-    content: ":";
+    content: ':';
   }
 `;
 
@@ -79,7 +79,7 @@ const KnowledgeContainer = styled.div`
 const KnowledgeName = styled.div`
   font-size: smaller;
   padding-bottom: calc(6px * 1);
-  color: ${({ theme }) => theme.secondaryText}
+  color: ${({ theme }) => theme.secondaryText};
 `;
 
 const KnowledgeLevelContainer = styled.div`
@@ -95,7 +95,7 @@ const knowledgeLevel = {
   proficient: { level: 4, color: '#26A69A' },
   competent: { level: 3, color: '#9D79BC' },
   advanced: { level: 2, color: '#507DBC' },
-  novice: { level: 1, color: '#5A5A66' }
+  novice: { level: 1, color: '#5A5A66' },
 };
 
 const Star = styled.div<{ $color: string }>`
@@ -108,15 +108,28 @@ const Star = styled.div<{ $color: string }>`
 const Knowledge = ({ children }: { children: keyof typeof knowledgeLevel }): React.ReactElement => (
   <KnowledgeContainer>
     <KnowledgeName>{children}</KnowledgeName>
-    <KnowledgeLevelContainer>{[...Array(knowledgeLevel[children].level)].map((_, i) => <Star key={i}
-                                                                                                     $color={knowledgeLevel[children].color}/>)}</KnowledgeLevelContainer>
+    <KnowledgeLevelContainer>
+      {[...Array(knowledgeLevel[children].level)].map((_, i) => (
+        <Star key={i} $color={knowledgeLevel[children].color} />
+      ))}
+    </KnowledgeLevelContainer>
   </KnowledgeContainer>
 );
 
-const Technology = ({ hide, knowledge, icon, children }: { hide?: boolean, knowledge: keyof typeof knowledgeLevel, icon: string, children: string }): React.ReactElement => (
+const Technology = ({
+  hide,
+  knowledge,
+  icon,
+  children,
+}: {
+  hide?: boolean;
+  knowledge: keyof typeof knowledgeLevel;
+  icon: string;
+  children: string;
+}): React.ReactElement => (
   <TechnologyContainer $hide={hide} $printing={useIsPrinting()}>
     <NameWithIcon>
-      <Icon $url={icon}/>
+      <Icon $url={icon} />
       <Name>{children}</Name>
     </NameWithIcon>
     <Knowledge>{knowledge}</Knowledge>
@@ -124,9 +137,9 @@ const Technology = ({ hide, knowledge, icon, children }: { hide?: boolean, knowl
 );
 
 const SectionContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    row-gap: calc(6px * 2);
+  display: flex;
+  flex-direction: column;
+  row-gap: calc(6px * 2);
 `;
 
 const HeaderContainer = styled.div`
@@ -136,110 +149,255 @@ const HeaderContainer = styled.div`
   align-items: center;
 `;
 
-const SectionButton = styled.div`
+const GlobalButton = styled.div`
   color: ${({ theme }) => theme.primaryText};
-  font-size: small;
-  padding: 0 calc(6px * 2);
-  text-decoration: underline;
+  font-size: 14pt;
+  font-weight: 600;
+  padding: calc(6px * 2) calc(6px * 4);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: calc(6px * 1);
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
-const Section = ({ children, header }: { children: Array<ReactElement<typeof Technology>>, header: string }): React.ReactElement => {
-  const [showAll, setShowAll] = useState(false);
+const Section = ({
+  children,
+  header,
+  showAll,
+}: {
+  children: Array<ReactElement<typeof Technology>>;
+  header: string;
+  showAll: boolean;
+}): React.ReactElement => {
   const isPrinting = useIsPrinting();
 
   return (
     <SectionContainer>
       <HeaderContainer>
         <Header>{header}</Header>
-        {!isPrinting && children.some(child => (child.props as any).hide) && <SectionButton onClick={() => { setShowAll(!showAll); }}>{showAll ? 'show less' : 'show all'}</SectionButton>}
       </HeaderContainer>
-      {children.filter(child => isPrinting || showAll ? true : (child.props as any).hide !== true)}
+      {children.filter(child =>
+        isPrinting || showAll
+          ? true
+          : !(child.props as (typeof child)['props'] & { hide?: boolean }).hide
+      )}
     </SectionContainer>
   );
 };
 
-export const Technologies = (): React.ReactElement => (
-  <TechnologiesContainer>
-    <Section header={'languages'}>
-      <Technology knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/typescript-icon.svg'}>TypeScript</Technology>
-      <Technology knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/javascript.svg'}>JavaScript</Technology>
-      <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/php.svg'}>PHP</Technology>
-      <Technology knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/html-5.svg'}>HTML5</Technology>
-      <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/css-3.svg'}>CSS</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/c-sharp.svg'}>C#</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/java.svg'}>Java</Technology>
-      <Technology hide knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/c-plusplus.svg'}>C/C++</Technology>
-      <Technology hide knowledge={'novice'}
-                            icon={'https://cdn.svgporn.com/logos/python.svg'}>Python</Technology>
-      <Technology hide knowledge={'novice'} icon={'https://cdn.svgporn.com/logos/go.svg'}>Go</Technology>
-    </Section>
-    <Section header={'frameworks'}>
-      <Technology knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/nodejs-icon-alt.svg'}>Node.js</Technology>
-      <Technology hide knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/jest.svg'}>Jest/Mocha</Technology>
-      <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/react.svg'}>React</Technology>
-      <Technology hide knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/redux.svg'}>Redux</Technology>
-      <Technology knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/graphql.svg'}>GraphQL</Technology>
-      <Technology hide knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/apollostack.svg'}>Apollo</Technology>
-    </Section>
-    <Section header={'databases'}>
-      <Technology knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/mongodb-icon.svg'}>MongoDB</Technology>
-      <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/redis.svg'}>Redis</Technology>
-      <Technology knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/mysql-icon.svg'}>MySQL</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/postgresql.svg'}>PostgreSQL</Technology>
-      <Technology hide knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/elasticsearch.svg'}>ElasticSearch</Technology>
-      <Technology hide knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/neo4j.svg'}>Neo4j</Technology>
-      <Technology hide knowledge={'novice'}
-                            icon={'https://cdn.svgporn.com/logos/influxdb-icon.svg'}>InfluxDB</Technology>
-    </Section>
-    <Section header={'DevOps'}>
-      <Technology knowledge={'proficient'}
-                            icon={'https://cdn.svgporn.com/logos/docker-icon.svg'}>Docker</Technology>
-      <Technology hide knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/gitlab.svg'}>GitLab
-        CI/CD</Technology>
-      <Technology knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/kubernetes.svg'}>Kubernetes</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/helm.svg'}>Helm</Technology>
-      <Technology knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/google-cloud.svg'}>Google
-        Cloud</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/nginx.svg'}>NGINX</Technology>
-      <Technology hide knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/apache.svg'}>Apache</Technology>
-      <Technology hide knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/consul.svg'}>Consul</Technology>
-    </Section>
-    <Section header={'message queues'}>
-      <Technology knowledge={'competent'}
-                            icon={'https://cdn.svgporn.com/logos/nats-icon.svg'}>NATS</Technology>
-      <Technology knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/kafka-icon.svg'}>Kafka</Technology>
-      <Technology knowledge={'advanced'}
-                            icon={'https://activemq.apache.org/assets/img/activemq_logo_icon_border.png'}>ActiveMQ</Technology>
-      <Technology hide knowledge={'advanced'}
-                            icon={'https://cdn.svgporn.com/logos/rabbitmq-icon.svg'}>RabbitMQ</Technology>
-    </Section>
-    <Section header={'other'}>
-      <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/git-icon.svg'}>Git</Technology>
-      <Technology knowledge={'expert'}
-                            icon={'https://cdn.svgporn.com/logos/prometheus.svg'}>Prometheus</Technology>
-    </Section>
-  </TechnologiesContainer>
-);
+const GlobalButtonContainer = styled.div`
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  padding: calc(6px * 2) 0;
+`;
+
+export const Technologies = (): React.ReactElement => {
+  const [showAll, setShowAll] = useState(false);
+  const isPrinting = useIsPrinting();
+
+  return (
+    <TechnologiesContainer>
+      {!isPrinting && (
+        <GlobalButtonContainer>
+          <GlobalButton
+            onClick={() => {
+              setShowAll(!showAll);
+            }}
+          >
+            {showAll ? (
+              <>
+                <EyeOff />
+                show fewer
+              </>
+            ) : (
+              <>
+                <Eye />
+                view full list
+              </>
+            )}
+          </GlobalButton>
+        </GlobalButtonContainer>
+      )}
+      <Section header={'languages'} showAll={showAll}>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/typescript-icon.svg'}>
+          TypeScript
+        </Technology>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/javascript.svg'}>
+          JavaScript
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/php.svg'}>
+          PHP
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/html-5.svg'}>
+          HTML5
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/css-3.svg'}>
+          CSS
+        </Technology>
+        <Technology hide knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/java.svg'}>
+          Java
+        </Technology>
+        <Technology
+          hide
+          knowledge={'proficient'}
+          icon={'https://cdn.svgporn.com/logos/c-sharp.svg'}
+        >
+          C#
+        </Technology>
+        <Technology
+          hide
+          knowledge={'advanced'}
+          icon={'https://cdn.svgporn.com/logos/c-plusplus.svg'}
+        >
+          C/C++
+        </Technology>
+        <Technology hide knowledge={'novice'} icon={'https://cdn.svgporn.com/logos/python.svg'}>
+          Python
+        </Technology>
+        <Technology hide knowledge={'novice'} icon={'https://cdn.svgporn.com/logos/go.svg'}>
+          Go
+        </Technology>
+      </Section>
+      <Section header={'frameworks'} showAll={showAll}>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/nodejs-icon-alt.svg'}>
+          Node.js
+        </Technology>
+        <Technology hide knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/jest.svg'}>
+          Jest/Mocha
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/react.svg'}>
+          React
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/graphql.svg'}>
+          GraphQL
+        </Technology>
+        <Technology
+          knowledge={'proficient'}
+          icon={'https://cdn.svgporn.com/logos/fastify-icon.svg'}
+        >
+          Express / Fastify
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/nestjs.svg'}>
+          NestJS
+        </Technology>
+        <Technology hide knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/redux.svg'}>
+          Redux
+        </Technology>
+        <Technology
+          hide
+          knowledge={'proficient'}
+          icon={'https://cdn.svgporn.com/logos/apollostack.svg'}
+        >
+          Apollo
+        </Technology>
+      </Section>
+      <Section header={'databases'} showAll={showAll}>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/mongodb-icon.svg'}>
+          MongoDB
+        </Technology>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/redis.svg'}>
+          Redis
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/mysql-icon.svg'}>
+          MySQL
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/postgresql.svg'}>
+          PostgreSQL
+        </Technology>
+        <Technology
+          hide
+          knowledge={'proficient'}
+          icon={'https://cdn.svgporn.com/logos/typeorm.svg'}
+        >
+          Drizzle (ORM)
+        </Technology>
+        <Technology hide knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/prisma.svg'}>
+          Prisma (ORM)
+        </Technology>
+        <Technology
+          hide
+          knowledge={'advanced'}
+          icon={'https://cdn.svgporn.com/logos/elasticsearch.svg'}
+        >
+          ElasticSearch
+        </Technology>
+        <Technology hide knowledge={'advanced'} icon={'https://cdn.svgporn.com/logos/neo4j.svg'}>
+          Neo4j
+        </Technology>
+        <Technology
+          hide
+          knowledge={'novice'}
+          icon={'https://cdn.svgporn.com/logos/influxdb-icon.svg'}
+        >
+          InfluxDB
+        </Technology>
+      </Section>
+      <Section header={'DevOps'} showAll={showAll}>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/docker-icon.svg'}>
+          Docker
+        </Technology>
+        <Technology hide knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/gitlab.svg'}>
+          GitLab CI/CD
+        </Technology>
+        <Technology knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/kubernetes.svg'}>
+          Kubernetes
+        </Technology>
+        <Technology knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/helm.svg'}>
+          Helm
+        </Technology>
+        <Technology knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/google-cloud.svg'}>
+          Google Cloud
+        </Technology>
+        <Technology hide knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/nginx.svg'}>
+          NGINX
+        </Technology>
+        <Technology hide knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/apache.svg'}>
+          Apache
+        </Technology>
+        <Technology hide knowledge={'advanced'} icon={'https://cdn.svgporn.com/logos/consul.svg'}>
+          Consul
+        </Technology>
+      </Section>
+      <Section header={'message queues'} showAll={showAll}>
+        <Technology knowledge={'competent'} icon={'https://cdn.svgporn.com/logos/nats-icon.svg'}>
+          NATS
+        </Technology>
+        <Technology
+          hide
+          knowledge={'competent'}
+          icon={'https://cdn.svgporn.com/logos/rabbitmq-icon.svg'}
+        >
+          RabbitMQ
+        </Technology>
+        <Technology knowledge={'advanced'} icon={'https://cdn.svgporn.com/logos/kafka-icon.svg'}>
+          Kafka
+        </Technology>
+        <Technology
+          knowledge={'advanced'}
+          icon={'https://activemq.apache.org/assets/img/activemq_logo_icon_border.png'}
+        >
+          ActiveMQ
+        </Technology>
+      </Section>
+      <Section header={'other'} showAll={showAll}>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/git-icon.svg'}>
+          Git
+        </Technology>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/prometheus.svg'}>
+          Prometheus
+        </Technology>
+        <Technology knowledge={'expert'} icon={'https://cdn.svgporn.com/logos/grafana.svg'}>
+          Grafana
+        </Technology>
+        <Technology knowledge={'proficient'} icon={'https://cdn.svgporn.com/logos/playwright.svg'}>
+          Playwright
+        </Technology>
+      </Section>
+    </TechnologiesContainer>
+  );
+};

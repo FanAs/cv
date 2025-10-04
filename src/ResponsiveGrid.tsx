@@ -14,7 +14,7 @@ const ResponsiveGridContainer = styled.div`
   @media print {
     grid-template-columns: 100%;
   }
-  
+
   @media screen and (max-width: 1024px) {
     grid-template-columns: 100%;
   }
@@ -22,9 +22,9 @@ const ResponsiveGridContainer = styled.div`
 
 export const ResponsiveGrid = (): React.ReactElement => (
   <ResponsiveGridContainer>
-    <Me/>
-    <Greeting/>
-    <LeftColumn/>
-    <Content/>
+    <Me />
+    <Greeting />
+    <LeftColumn />
+    <Content />
   </ResponsiveGridContainer>
 );

@@ -20,10 +20,10 @@ const Separator = styled.div`
 
 export const LeftColumn = (): React.ReactElement => (
   <LeftColumnContainer>
-    <PrimaryInfo/>
-    <Separator/>
-    <Languages/>
-    <Separator/>
-    <Technologies/>
+    <PrimaryInfo />
+    <Separator />
+    <Languages />
+    <Separator />
+    <Technologies />
   </LeftColumnContainer>
 );
