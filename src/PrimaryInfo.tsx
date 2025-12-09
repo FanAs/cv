@@ -43,11 +43,5 @@ export const PrimaryInfo = (): React.ReactElement => (
       <Title>city</Title>
       <Value>Prague</Value>
     </Line>
-    <Line>
-      <Title>age</Title>
-      <Value>
-        {Math.floor((new Date().getTime() - new Date('1998-02-21').getTime()) / 3.15576e10)}
-      </Value>
-    </Line>
   </PrimaryInfoContainer>
 );
